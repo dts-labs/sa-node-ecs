@@ -1,0 +1,14 @@
+{
+  "containerDefinitions": [{
+    "name": "simple-app",
+    "cpu": 10,
+    "essential": true,
+    "image": "567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:latest",
+    "memory": 300,
+    "portMappings": [{
+      "hostPort": 80,
+      "containerPort": 8080
+    }]
+  }],
+  "family": "awesomeTask"
+}

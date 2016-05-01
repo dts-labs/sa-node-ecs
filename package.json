@@ -1,0 +1,8 @@
+{
+  "name": "HelloSuperAwesome",
+  "description": "Simple Hello World Microservice",
+  "author": "DTS Labs <dtechsolutionslabs@gmail.com>",
+  "dependencies": {
+    "express": "*"
+  }
+}

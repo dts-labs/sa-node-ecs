@@ -1,0 +1,4 @@
+web:
+  image: "awesome"
+  ports:
+    - "8080:8080"
