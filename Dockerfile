@@ -12,8 +12,6 @@ WORKDIR /src
 ADD . /src
 RUN . ~/.bashrc
 
-RUN ls -la
-
 RUN npm install
 
 EXPOSE 8080
