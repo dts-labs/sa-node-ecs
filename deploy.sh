@@ -21,7 +21,7 @@ deploy_image() {
 
 update_service() {
     echo "Creating new task/revision"
-    task = $(aws ecs register-task-definition --cli-input-json file://task.json | $JQ '.taskDefinition.taskDefinitionArn')
+    task=$(aws ecs register-task-definition --cli-input-json file://task.json | $JQ '.taskDefinition.taskDefinitionArn')
     echo "Task: $task"
 
     echo "Updating Service"
