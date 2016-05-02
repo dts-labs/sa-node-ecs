@@ -21,10 +21,10 @@ deploy_image() {
 
 update_service() {
     echo "Creating new task/revision"
-    aws ecs register-task-definition --cli-input-json file://task.json
+    $task = $(aws ecs register-task-definition --cli-input-json file://task.json | $JQ '.taskDefinition.taskDefinitionArn')
 
     echo "Updating Service"
-    aws ecs update-service --cluster $AWS_CLUSTER --service $AWS_SERVICE --task-definition awesomeTask
+    aws ecs update-service --cluster $AWS_CLUSTER --service $AWS_SERVICE --task-definition $task
 
     echo "Updated! Let AWS do the rest"
 }
