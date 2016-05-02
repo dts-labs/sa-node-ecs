@@ -30,8 +30,8 @@ update_service() {
 
     prev_task="$(echo $task | cut -d: -f1-6):$prev_revision"
     
-    echo "Stopping current task"
-    aws ecs stop-task --task $prev_task
+    echo "Stopping current task: $prev_task"
+    aws ecs stop-task --task awesomeTask
 
     echo "Updating Service"
     aws ecs update-service --cluster $AWS_CLUSTER --service $AWS_SERVICE --task-definition $task
