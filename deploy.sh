@@ -25,10 +25,7 @@ update_service() {
     echo "New Task: $task"
 
     # Fix: update-service doesn't stop current task
-    revision=$(echo $task | cut -d: -f7)
-    prev_revision=$(($revision-1))
-
-    prev_task="$(echo $task | cut -d: -f1-6):$prev_revision"
+    prev_task="$(aws ecs list-tasks --cluster $AWS_CLUSTER | $JQ ".taskArns[0]")"
     
     echo "Stopping current task: $prev_task"
     aws ecs stop-task --cluster $AWS_CLUSTER --task $prev_task
