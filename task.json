@@ -3,7 +3,7 @@
     "name": "simple-app",
     "cpu": 10,
     "essential": true,
-    "image": "567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:latest",
+    "image": "567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:_TAG_",
     "memory": 300,
     "portMappings": [{
       "hostPort": 80,
