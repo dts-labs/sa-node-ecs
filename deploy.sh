@@ -15,9 +15,9 @@ deploy_image() {
     docker build -t awesome .
     echo "# Tagging"
     tag="$(date "+%Y-%m-%d_%H%M%S")"
-    docker tag awesome:tag 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:tag
+    docker tag awesome:$tag 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:$tag
     echo "# Pushing"
-    docker push 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:tag
+    docker push 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:$tag
     echo "Image deployed!"
 }
 
