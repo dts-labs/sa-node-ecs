@@ -17,7 +17,7 @@ deploy_image() {
     eval "$(aws ecr get-login --region eu-west-1)"
     echo "# Building"
     # Pull to avoid re-build chached
-    docker pull 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:$branch
+    docker pull 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:$branch || echo "No previous docker image of branch $branch"
     docker build -t awesome .
     echo "# Tagging"
     docker tag awesome 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:$tag
