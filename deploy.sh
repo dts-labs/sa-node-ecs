@@ -21,7 +21,7 @@ deploy_image() {
     docker build -t awesome .
     echo "# Tagging"
     docker tag awesome 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:$tag
-    docker tag awesome 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:$branch
+    docker tag -f awesome 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:$branch
     echo "# Pushing"
     docker push 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:$tag
     docker push 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:$branch
