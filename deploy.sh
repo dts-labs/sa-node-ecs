@@ -31,6 +31,12 @@ deploy_image() {
 update_service() {
     # The best option is update-stack because allow rollback if deployment fails
 
+    # Fix: update-service doesn't stop current task
+    prev_task="$(aws ecs list-tasks --cluster $AWS_CLUSTER | $JQ ".taskArns[0]")"
+    
+    echo "Stopping current task: $prev_task"
+    aws ecs stop-task --cluster $AWS_CLUSTER --task $prev_task
+
     echo "Updating Task definition"
     sed s/_TAG_/$tag/g task.json > task2.json
 
