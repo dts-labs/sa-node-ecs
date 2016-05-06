@@ -6,22 +6,31 @@ set -x
 set -o pipefail
 
 JQ="jq --raw-output --exit-status"
-tag="$(date "+%Y-%m-%d_%H%M%S")"
+tag=$(date "+%Y-%m-%d_%H%M%S")
+# Branch must be defined outside
+branch="master"
 
 deploy_image() {
     echo "#### Deploying image"
+    echo "# Working on branch $branch"
     echo "# Login"
     eval "$(aws ecr get-login --region eu-west-1)"
     echo "# Building"
+    # Pull to avoid re-build chached
+    docker pull 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:$branch
     docker build -t awesome .
     echo "# Tagging"
     docker tag awesome 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:$tag
+    docker tag awesome 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:$branch
     echo "# Pushing"
     docker push 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:$tag
+    docker push 567141585396.dkr.ecr.eu-west-1.amazonaws.com/awesome:$branch
     echo "Image deployed!"
 }
 
 update_service() {
+    # The best option is update-stack because allow rollback if deployment fails
+
     echo "Updating Task definition"
     sed s/_TAG_/$tag/g task.json > task2.json
 
